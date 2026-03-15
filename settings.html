@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>Settings — AWS SAA-C03</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- Top bar -->
+  <div class="top-bar">
+    <button class="icon-btn" onclick="history.back()">&#8592;</button>
+    <div class="top-bar-title">Settings</div>
+  </div>
+
+  <!-- Settings options -->
+  <div class="settings-body">
+
+    <div class="settings-section-label">Progress</div>
+    <div class="settings-card">
+      <button class="settings-row danger" onclick="confirmReset('all')">
+        <div class="settings-row-icon">&#128465;&#65039;</div>
+        <div class="settings-row-body">
+          <div class="settings-row-label">Reset All Progress</div>
+          <div class="settings-row-desc">Clear every correct &amp; wrong answer</div>
+        </div>
+        <div class="settings-row-arrow">&#8250;</div>
+      </button>
+      <button class="settings-row danger" onclick="confirmReset('wrong')">
+        <div class="settings-row-icon">&#10060;</div>
+        <div class="settings-row-body">
+          <div class="settings-row-label">Clear Wrong Answers</div>
+          <div class="settings-row-desc">Mark all wrong questions as unanswered</div>
+        </div>
+        <div class="settings-row-arrow">&#8250;</div>
+      </button>
+      <button class="settings-row danger" onclick="confirmReset('correct')">
+        <div class="settings-row-icon">&#10003;</div>
+        <div class="settings-row-body">
+          <div class="settings-row-label">Clear Correct Answers</div>
+          <div class="settings-row-desc">Mark all correct questions as unanswered</div>
+        </div>
+        <div class="settings-row-arrow">&#8250;</div>
+      </button>
+    </div>
+
+    <div class="settings-section-label">Flags &amp; Scores</div>
+    <div class="settings-card">
+      <button class="settings-row danger" onclick="confirmReset('flagged')">
+        <div class="settings-row-icon">&#128681;</div>
+        <div class="settings-row-body">
+          <div class="settings-row-label">Clear Flagged Questions</div>
+          <div class="settings-row-desc">Remove all flags</div>
+        </div>
+        <div class="settings-row-arrow">&#8250;</div>
+      </button>
+      <button class="settings-row danger" onclick="confirmReset('bestscore')">
+        <div class="settings-row-icon">&#127942;</div>
+        <div class="settings-row-body">
+          <div class="settings-row-label">Reset Best Score</div>
+          <div class="settings-row-desc">Clear your saved best percentage</div>
+        </div>
+        <div class="settings-row-arrow">&#8250;</div>
+      </button>
+    </div>
+
+  </div>
+
+  <!-- Confirmation modal -->
+  <div class="modal-backdrop" id="modal-backdrop">
+    <div class="modal-box">
+      <div class="modal-title" id="modal-title">Are you sure?</div>
+      <div class="modal-desc"  id="modal-desc">This cannot be undone.</div>
+      <div class="modal-btns">
+        <button class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+        <button class="btn btn-primary"   id="modal-confirm-btn" style="background:var(--wrong);">Reset</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/state.js"></script>
+  <script src="js/settings.js"></script>
+</body>
+</html>

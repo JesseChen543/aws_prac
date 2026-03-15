@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>Quiz — AWS SAA-C03</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body style="flex-direction:column;">
+
+  <!-- Quiz header -->
+  <div class="quiz-header">
+    <div class="quiz-header-top">
+      <div class="quiz-title" id="quiz-title">AWS SAA-C03</div>
+      <div class="score-badge" id="score-badge">0 / 0</div>
+    </div>
+    <div class="progress-bar-wrap">
+      <div class="progress-bar" id="progress-bar" style="width:0%"></div>
+    </div>
+    <div class="quiz-header-meta">
+      <span class="q-counter" id="q-counter">Question 1 of 0</span>
+      <span id="accuracy-pct" style="font-size:13px;color:var(--subtext);">—</span>
+    </div>
+  </div>
+
+  <!-- Filter toggles -->
+  <div class="filter-bar">
+    <button class="filter-toggle" id="flagged-toggle" onclick="toggleFlaggedMode()">&#128681; Flagged</button>
+    <button class="filter-toggle" id="wrong-toggle"   onclick="toggleWrongMode()">&#10060; Wrong Only</button>
+  </div>
+
+  <!-- Main content -->
+  <div class="quiz-main">
+
+    <!-- Active quiz area -->
+    <div id="quiz-area">
+
+      <div class="question-card">
+        <div class="question-header">
+          <span class="domain-tag" id="q-domain"></span>
+          <button class="flag-btn" id="flag-btn" onclick="toggleFlag()">&#128681;</button>
+        </div>
+        <p class="question-text" id="q-text">Loading&hellip;</p>
+        <div class="q-type-hint" id="q-type-hint"></div>
+        <div class="explanation" id="q-explanation"></div>
+      </div>
+
+      <div class="options" id="options-container"></div>
+
+      <div class="empty-msg" id="empty-msg" style="display:none;">
+        No questions match this filter.
+      </div>
+
+      <div class="action-row">
+        <button class="btn btn-secondary" onclick="history.back()" style="flex:0 0 auto;padding:16px 20px;">&#8592;</button>
+        <button class="btn btn-primary"   id="btn-submit" onclick="submitMulti()">Submit</button>
+        <button class="btn btn-primary"   id="btn-next"   onclick="nextQuestion()">Next &#8594;</button>
+      </div>
+
+    </div><!-- #quiz-area -->
+
+    <!-- End / results screen -->
+    <div class="end-screen" id="end-screen">
+      <div class="end-card">
+        <div class="end-emoji" id="end-emoji">🎉</div>
+        <div class="end-title" id="end-title">Quiz Complete!</div>
+        <div class="end-score" id="end-score">0 / 0</div>
+        <div class="end-pct"   id="end-pct">0% correct</div>
+        <div class="end-stats">
+          <div class="stat-box stat-correct">
+            <div class="stat-num"   id="end-correct">0</div>
+            <div class="stat-label">Correct</div>
+          </div>
+          <div class="stat-box stat-wrong">
+            <div class="stat-num"   id="end-wrong">0</div>
+            <div class="stat-label">Wrong</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-num"   id="end-flagged">0</div>
+            <div class="stat-label">Flagged</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-num"   id="end-total">0</div>
+            <div class="stat-label">Total</div>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <button class="btn btn-primary"   onclick="restartQuiz()">&#128260; Restart</button>
+          <button class="btn btn-secondary" onclick="reviewFlagged()" id="btn-review-flagged">&#128681; Review Flagged</button>
+          <button class="btn btn-secondary" onclick="history.back()">&#8592; Back to Category</button>
+        </div>
+      </div>
+    </div><!-- #end-screen -->
+
+  </div><!-- .quiz-main -->
+
+  <script src="js/state.js"></script>
+  <script src="js/quiz.js"></script>
+</body>
+</html>

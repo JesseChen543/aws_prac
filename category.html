@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>Category — AWS SAA-C03</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- Top bar -->
+  <div class="top-bar">
+    <button class="icon-btn" onclick="history.back()">&#8592;</button>
+    <div class="top-bar-title" id="cat-screen-title">Category</div>
+  </div>
+
+  <!-- Body -->
+  <div class="cat-screen-body">
+
+    <!-- Correct / Wrong / Remaining summary -->
+    <div class="cat-summary" id="cat-summary"></div>
+
+    <div class="q-grid-label">Tap a question to start from there</div>
+
+    <!-- Question tiles grid -->
+    <div class="q-grid" id="q-grid"></div>
+
+  </div>
+
+  <script src="js/state.js"></script>
+  <script src="js/category.js"></script>
+</body>
+</html>
