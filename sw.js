@@ -1,4 +1,4 @@
-const CACHE = 'aws-quiz-v6';
+const CACHE = 'aws-quiz-v7';
 const ASSETS = [
   './',
   './index.html',
@@ -30,6 +30,14 @@ self.addEventListener('activate', e => {
 
 self.addEventListener('fetch', e => {
   e.respondWith(
-    caches.match(e.request).then(r => r || fetch(e.request).catch(() => r))
+    caches.match(e.request).then(r => {
+      if (r) return r;
+      return fetch(e.request).catch(() =>
+        new Response(
+          JSON.stringify({ error: 'offline' }),
+          { status: 503, headers: { 'Content-Type': 'application/json' } }
+        )
+      );
+    })
   );
 });

@@ -84,9 +84,17 @@ function escHtml(str) {
 }
 
 async function loadQuestions() {
-  const res = await fetch('./questions.json');
-  if (!res.ok) throw new Error(`HTTP ${res.status}`);
-  return res.json();
+  try {
+    const res = await fetch('./questions.json');
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    return res.json();
+  } catch (err) {
+    throw new Error(
+      navigator.onLine
+        ? `Failed to load questions (${err.message})`
+        : 'You are offline. Open the app once with internet to cache it, then it works offline.'
+    );
+  }
 }
 
 function registerSW() {
