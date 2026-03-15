@@ -84,15 +84,24 @@ function escHtml(str) {
 }
 
 async function loadQuestions() {
+  // Try network (SW intercepts and serves from cache when offline)
   try {
     const res = await fetch('./questions.json');
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     return res.json();
-  } catch (err) {
+  } catch (fetchErr) {
+    // SW may not be active yet — try Cache API directly as fallback
+    try {
+      if ('caches' in window) {
+        const cached = await caches.match('./questions.json');
+        if (cached && cached.ok) return cached.json();
+      }
+    } catch (_) { /* cache API unavailable */ }
+
     throw new Error(
       navigator.onLine
-        ? `Failed to load questions (${err.message})`
-        : 'You are offline. Open the app once with internet to cache it, then it works offline.'
+        ? `Failed to load questions (${fetchErr.message})`
+        : 'You are offline. Open the app once with internet first to enable offline access.'
     );
   }
 }
