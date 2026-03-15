@@ -1,4 +1,4 @@
-const CACHE = 'aws-quiz-v10';
+const CACHE = 'aws-quiz-v11';
 const ASSETS = [
   './index.html',
   './category.html',
@@ -28,12 +28,12 @@ self.addEventListener('activate', e => {
 
 self.addEventListener('fetch', e => {
   e.respondWith(
-    caches.match(e.request).then(r => {
+    // ignoreSearch: true so quiz.html?category=X matches cached quiz.html
+    caches.match(e.request, { ignoreSearch: true }).then(r => {
       if (r) return r;
       return fetch(e.request).catch(() =>
-        new Response(
-          JSON.stringify({ error: 'offline' }),
-          { status: 503, headers: { 'Content-Type': 'application/json' } }
+        new Response('<h2>You are offline. Please open the app once with internet to cache it.</h2>',
+          { status: 503, headers: { 'Content-Type': 'text/html' } }
         )
       );
     })
