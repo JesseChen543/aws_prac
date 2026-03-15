@@ -1,12 +1,12 @@
-const CACHE = 'aws-quiz-v8';
+const CACHE = 'aws-quiz-v9';
 const ASSETS = [
   './',
   './index.html',
   './category.html',
   './quiz.html',
   './settings.html',
-  './questions.json',
   './css/styles.css',
+  './js/questions-data.js',
   './js/state.js',
   './js/home.js',
   './js/category.js',

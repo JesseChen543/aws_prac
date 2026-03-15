@@ -83,27 +83,13 @@ function escHtml(str) {
     .replace(/"/g, '&quot;');
 }
 
-async function loadQuestions() {
-  // Try network (SW intercepts and serves from cache when offline)
-  try {
-    const res = await fetch('./questions.json');
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    return res.json();
-  } catch (fetchErr) {
-    // SW may not be active yet — try Cache API directly as fallback
-    try {
-      if ('caches' in window) {
-        const cached = await caches.match('./questions.json');
-        if (cached && cached.ok) return cached.json();
-      }
-    } catch (_) { /* cache API unavailable */ }
-
-    throw new Error(
-      navigator.onLine
-        ? `Failed to load questions (${fetchErr.message})`
-        : 'You are offline. Open the app once with internet first to enable offline access.'
-    );
+function loadQuestions() {
+  // Questions are bundled in questions-data.js as window.QUESTIONS_DATA.
+  // No fetch needed — works fully offline without a service worker.
+  if (window.QUESTIONS_DATA && window.QUESTIONS_DATA.length) {
+    return Promise.resolve(window.QUESTIONS_DATA);
   }
+  return Promise.reject(new Error('Questions data not loaded. Please refresh the page.'));
 }
 
 function registerSW() {
